@@ -1,0 +1,11 @@
+<?xml version="1.0" standalone="yes"?>
+<options>
+	<option master="false" key="Snap" supported="yes">
+		<name>Snap to grid</name>
+		<value>off</value>
+	</option>
+	<option master="true" key="MU" supported="yes">
+		<name>Multi-user Mode</name>
+		<value>off</value>
+	</option>
+</options>
