@@ -40,7 +40,7 @@ Evt.Sweep = Evt.Base.extend({
 	},
 	
 	fireChain: function() {
-		if(this.chn.chains.length < 1) $clear(this.active);
+		if(this.chn.chains && this.chn.chains.length < 1) $clear(this.active);
 		this.chn.callChain();
 	}
 });
