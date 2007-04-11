@@ -38,7 +38,7 @@ Evt.Archive = Evt.Base.extend({
 	},
 	
 	checkButtons: function() {
-		if(this.data[0].pr('scrollLeft') < 1) {
+		if(this.data[0].p.scrollLeft < 1) {
 			this.data[2].p.addClass('grey');
 			this.data[4].p.addClass('grey');
 		} else {
@@ -46,7 +46,7 @@ Evt.Archive = Evt.Base.extend({
 			this.data[4].p.removeClass('grey');
 		}
 		
-		if(this.data[0].pr('scrollLeft') >= this.calcLimit()) {
+		if(this.data[0].p.scrollLeft >= this.calcLimit()) {
 			this.data[3].p.addClass('grey');
 			this.data[5].p.addClass('grey');
 		} else {
@@ -60,20 +60,20 @@ Evt.Archive = Evt.Base.extend({
 	},
 	
 	calcLimit: function() {
-		return (this.notes.length * 32) - (this.calcMax() * 32) - (5 * 32);
+		return (this.notes.length * 32) - (this.calcMax() * 32);
 	},
 	
 	prev: function() {
 		if(this.effects.scroll.timer) this.effects.scroll.clearTimer();
-		if(this.data[0].pr('scrollLeft') - (32 * this.data[6].pr('move')) < 0) var mv = 0;
-		else var mv = this.data[0].pr('scrollLeft') - (32 * this.data[6].pr('move'));
+		if(this.data[0].p.scrollLeft - (32 * this.data[6].pr('move')) < 0) var mv = 0;
+		else var mv = this.data[0].p.scrollLeft - (32 * this.data[6].pr('move'));
 		this.effects.scroll.left(mv);
 	},
 	
 	next: function() {
 		if(this.effects.scroll.timer) this.effects.scroll.clearTimer();
-		if(32 * this.data[6].pr('move') > this.calcLimit()) var mv = this.calcLimit();
-		else var mv = this.data[6].pr('move') * 32;
+		if((32 * this.data[6].pr('move')) + this.data[0].p.scrollLeft > this.calcLimit()) var mv = this.calcLimit();
+		else var mv = (this.data[6].pr('move') * 32) + this.data[0].p.scrollLeft;
 		this.effects.scroll.right(mv);
 	},
 	
