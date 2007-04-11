@@ -2,10 +2,10 @@
 <options>
 	<option master="false" key="Snap" supported="yes">
 		<name>Snap to grid</name>
-		<value>off</value>
+		<value>on</value>
 	</option>
 	<option master="true" key="MU" supported="yes">
 		<name>Multi-user Mode</name>
-		<value>off</value>
+		<value>on</value>
 	</option>
 </options>
