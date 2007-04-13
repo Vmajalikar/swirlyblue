@@ -34,8 +34,8 @@ Opt.MU = Opt.Base.extend({
 					this.value = '';
 				}
 			};
-			this.f.masterUser.addEvent('focus', fn.bind(f.masterUser));
-			this.f.masterPass.addEvent('focus', fn.bind(f.masterPass));
+			this.f.masterUser.addEvent('focus', fn.bind(this.f.masterUser));
+			this.f.masterPass.addEvent('focus', fn.bind(this.f.masterPass));
 			this.f.saveMaster.addEvent('click', this.addMaster.bind(this));
 		}
 		if(this.sub.getElement('img.addUser')) this.sub.getElement('img.addUser').addEvent('click', this.loadAddUserBox.bind(this));
