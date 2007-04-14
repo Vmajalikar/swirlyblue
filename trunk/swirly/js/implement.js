@@ -23,22 +23,10 @@ Window.addEvent('domready', function() {
 	eStack.get('ImgLoader');
 	eStack.get('DebugBox');
 	
-	var evts = new Array(
-		'OptBox',
-		'Sweep'
-	);
-	
-	var opts = new Array(
-		'MU',
-		'Snap'
-	);
-	
-	evts.each(function(evt) {
-		if(Evt[evt]) new Evt[evt];
-	});
-	
-	opts.each(function(opt) {
-		if(Opt && Opt[opt]) new Opt[opt];
+	Swirly.init.each(function(e) {
+		var mname = e.split('.')[1];
+		if(e.indexOf('Evt.') > -1 && Evt[mname]) new Evt[mname];
+		else if(e.indexOf('Opt.') > -1 && Opt && Opt[mname]) new Opt[mname];
 	});
 	
 	eStack.contents.ImgLoader.load();
