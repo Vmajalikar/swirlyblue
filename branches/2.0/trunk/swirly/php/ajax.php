@@ -120,22 +120,23 @@
 		break;
 		
 		case 'EDIT_USER':
-			if(check_login($_SESSION, $users) && $_SESSION['uid'] != 0) {
-				echo 'FAIL||You do not have permission to edit users.';
-				exit;
-			}
 			$usern = str_replace($bad, '', $_REQUEST['user']);
 			$oldPass = md5($_REQUEST['oldPass']);
 			$newPass = ($_REQUEST['newPass'] != '') ? md5($_REQUEST['newPass']) : $oldPass;
 			$img = str_replace($bad, '', $_REQUEST['img']);
 			$id = str_replace($bad, '', $_REQUEST['id']);
 			
+			if(check_login($_SESSION, $users) && $_SESSION['uid'] != 0 && $_SESSION['uid'] != $id) {
+				echo 'FAIL||You do not have permission to edit users.';
+				exit;
+			}
+			
 			if(!$user = get_user((int) $id, $users)) {
 				echo 'FAIL||That user does not exist.';
 				exit;
 			}
 			
-			if($oldPass != (string) $user -> pass) {
+			if($oldPass != (string) $user -> pass && $_SESSION['uid'] != 0) {
 				echo 'FAIL||Passwords do not match.';
 				exit;
 			}

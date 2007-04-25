@@ -190,7 +190,7 @@
 						<tr id="user_' . $user['id'] . '">
 							<td>' . $user -> name . '</td>
 							<td><img src="images/' . $user -> img . '.png" alt="user image" /></td>
-							<td><img src="images/pencil.png" class="editUser" alt="edit user" /> <img src="images/delete.png" class="delUser" alt="delete user" /></td>
+							<td><img src="images/pencil.png" class="editUser" ' . (((int)$user['id'] == $_SESSION['uid']) ? 'alt="editing allowed"' : 'alt="edit user"') . ' /> <img src="images/delete.png" class="delUser" alt="delete user" /></td>
 						</tr>
 			';
 		}
