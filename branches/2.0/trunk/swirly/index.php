@@ -320,7 +320,7 @@
 				<form id="fEditNote" action="index.php">
 					<div class="urgent duedate">
 					<input type="hidden" name="noteId" value="" />
-					<input class="date-dd" name="date-dd" maxlength="2" type="text" /> / <input class="date-mm" name="date-mm" maxlength="2" type="text" /> / <input class="date" name="date" maxlength="4" type="text" /></div>
+					<input class="date-dd" name="date-dd" maxlength="2" type="text" /> / <input class="date-mm" name="date-mm" maxlength="2" type="text" /> / <input class="date" name="date" maxlength="4" type="text" /> <input type="text" class="date-dd" name="hour" maxlength="2" /> : <input type="text" class="date-dd" name="minute" maxlength="2" /> : <input type="text" class="date-dd" name="second" maxlength="2" /></div>
 
 					<h2>
 						<label>Title</label>
