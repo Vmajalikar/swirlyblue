@@ -23,9 +23,7 @@ Opt.MU = Opt.Base.extend({
 		
 		if(!this.opt.disabled) this.opt.addEvent('change', this.extendMU.bindAsEventListener(this));
 		else {
-			$$('div.subOpts div table tbody tr td img.editUser').each(function(el) {
-				if(el.getAttribute('alt') != 'editing allowed') el.remove();
-			});
+			$$('div.subOpts div table tbody tr td img.editUser').each(function(el) { el.remove(); });
 			$$('div.subOpts div table tbody tr td img.delUser').each(function(el) { el.remove(); });
 			$E('div img.addUser').remove();
 		}

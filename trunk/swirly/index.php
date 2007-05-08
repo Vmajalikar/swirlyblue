@@ -190,7 +190,7 @@
 						<tr id="user_' . $user['id'] . '">
 							<td>' . $user -> name . '</td>
 							<td><img src="images/' . $user -> img . '.png" alt="user image" /></td>
-							<td><img src="images/pencil.png" class="editUser" ' . (((int)$user['id'] == $_SESSION['uid']) ? 'alt="editing allowed"' : 'alt="edit user"') . ' /> <img src="images/delete.png" class="delUser" alt="delete user" /></td>
+							<td><img src="images/pencil.png" class="editUser" alt="edit user" /> <img src="images/delete.png" class="delUser" alt="delete user" /></td>
 						</tr>
 			';
 		}
@@ -320,7 +320,7 @@
 				<form id="fEditNote" action="index.php">
 					<div class="urgent duedate">
 					<input type="hidden" name="noteId" value="" />
-					<input class="date-dd" name="date-dd" maxlength="2" type="text" /> / <input class="date-mm" name="date-mm" maxlength="2" type="text" /> / <input class="date" name="date" maxlength="4" type="text" /> <input type="text" class="date-dd" name="hour" maxlength="2" /> : <input type="text" class="date-dd" name="minute" maxlength="2" /> : <input type="text" class="date-dd" name="second" maxlength="2" /></div>
+					<input class="date-dd" name="date-dd" maxlength="2" type="text" /> / <input class="date-mm" name="date-mm" maxlength="2" type="text" /> / <input class="date" name="date" maxlength="4" type="text" /></div>
 
 					<h2>
 						<label>Title</label>

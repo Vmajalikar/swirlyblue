@@ -20,15 +20,6 @@ var Swirly = {
 		_opt_snap: 'opts/snap.js'
 	}),
 	
-	JsEvts: {
-		opts: 'Evt.OptBox',
-		sweep: 'Evt.Sweep',
-		_opt_mu: 'Opt.MU',
-		_opt_snap: 'Opt.Snap'
-	},
-	
-	init: [],
-	
 	getModules: function() {
 		var ucMods = this.srcString.split('?')[1].split(',');
 		ucMods[0] = ucMods[0].split('=')[1];
@@ -55,7 +46,6 @@ var Swirly = {
 			var files = this.JsFiles.get(mod);
 			if($type(files) != 'array') files = new Array(files);
 			files.each(this.loadScript);
-			if(this.JsEvts[mod]) this.init.push(this.JsEvts[mod]);
 		}.bind(this));
 	}
 };
