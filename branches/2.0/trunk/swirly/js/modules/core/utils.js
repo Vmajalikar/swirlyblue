@@ -40,22 +40,19 @@ var jFx = {
 
 var dateFuncs = {
 	parseDate: function(string) {
-		var d = string.split(' ');
-		if(!d[1]) d[1] = '0:0:0';
-		var t = d[1].split(':');
-		var d = d[0].split('-');
+		var d = string.split('-');
 		var tmp = new Date();
 		tmp.setTime(0);
 		var m = d[1].toInt() - 1;
 		tmp.setFullYear(d[0].toInt(), m, d[2].toInt());
-		tmp.setHours(t[0]); tmp.setMinutes(t[1]); tmp.setSeconds(t[2]);
+		tmp.setHours(0);
 		return tmp;
 	}
 };
 
 var fFunc = {
 	clearForm: function(f) {
-		var protected = f.getElements('.protect');
+		var protected = $$('.protect');
 		for(var i = 0; i < f.elements.length; i++) {
 			if(f.elements[i].value && !protected.test(f.elements[i])) f.elements[i].value = '';
 		}
@@ -69,22 +66,16 @@ var fFunc = {
 		due.setTime(0);
 		if(f.elements[1].value != '' && f.elements[2].value != '' && f.date.value != '') due.setFullYear(f.date.value.toInt(), f.elements[2].value.toInt() - 1, f.elements[1].value.toInt());
 		else due = '';
-		var time = new Array();
-		for(var i = 4; i <= 6; i++) {
-			time.push(f.elements[i].value + 1 - 1);
-		}
-		if(due != '') {
-			due.setHours(time[0]); due.setMinutes(time[1]); due.setSeconds(time[2]);
-		}
 		var today = new Date();
 		if(due != '' && due < today && f.noteId.value == '') due = '';
 		if(due != '') {
-			due = (due.getYear() + 1900) + '-' + (due.getMonth() + 1) + '-' + due.getDate() + ' ' + due.getHours() + ':' + due.getMinutes() + ':' + due.getSeconds();
+			due.setHours(0);
+			due = (due.getYear() + 1900) + '-' + (due.getMonth() + 1) + '-' + due.getDate();
 		}
 		return {
 			id: id,
 			sec: (f.noteId.value == '') ? 'screen' : this.controls.n.getNote(id).sec,
-			created: (d.getYear() + 1900) + '-' + (d.getMonth() + 1) + '-' + d.getDate() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getHours(),
+			created: (d.getYear() + 1900) + '-' + (d.getMonth() + 1) + '-' + d.getDate(),
 			due: due,
 			x: c.left,
 			y: c.top,
