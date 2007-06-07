@@ -62,11 +62,20 @@ Evt.AddNote = Evt.Base.extend({
 		this.data[1].p.show();
 		var id = el.getProperty('id').split('_')[1];
 		var n = this.controls.n.getNote(id);
-		var d = (n.due != '') ? n.due.split('-') : new Array('', '', '');
+		if(n.due != '') {
+			var d = n.due.split(' ');
+			var t = d[1].split(':');
+			var d = d[0].split('-');
+		} else {
+			var d = new Array('', '', ''); var t = d;
+		}
 		this.data[3].p['noteId'].value = id;
 		this.data[3].p.elements[1].value = d[2];
 		this.data[3].p.elements[2].value = d[1];
 		this.data[3].p['date'].value = d[0];
+		this.data[3].p['hour'].value = t[0];
+		this.data[3].p['minute'].value = t[1];
+		this.data[3].p['second'].value = t[2];
 		this.data[3].p['Title'].value = n.title.replace(/!\[\[AMP\]\]/g, '&');
 		this.data[3].p['Category'].value = n.cat.replace(/!\[\[AMP\]\]/g, '&');
 		this.data[4].set('images/_' + n.img + '.png', 'src');
