@@ -45,16 +45,31 @@ Evt.ViewNote = Evt.Base.extend({
 			var class = 'urgent';
 		} else {
 			var txt = '';
-			var days = Math.round((d - today) / (3600 * 24 * 1000));
-			var years = Math.floor(days / 365);
-			var months = Math.floor((days - (years * 365)) / 30);
-			days = days - (years * 365) - (months * 30) + 1;
+			var seconds = Math.round((d - today) / 1000);
+			var years = Math.floor(seconds / 31536000);
+			var months = Math.floor((seconds - (years * 31536000)) / 2592000);
+			var days = Math.floor((seconds - (years * 31536000) - (months * 2592000)) / 86400);
+			var hours = Math.floor((seconds - (years * 31536000) - (months * 2592000) - (days * 86400)) / 3600);
+			var minutes = Math.floor((seconds - (years * 31536000) - (months * 2592000) - (days * 86400) - (hours * 3600)) / 60);
+			seconds = seconds - (years * 31536000) - (months * 2592000) - (days * 86400) - (hours * 3600) - (minutes * 60);
 			if(years) txt += years + ' ' + ((years > 1) ? 'years' : 'year');
-			if(months) txt += ((txt != '') ? ', ' : '') + months + ' ' + ((months > 1) ? 'months' : 'month');
-			if(days) txt += ((txt != '') ? ' and ' : '') + days + ' ' + ((days > 1) ? 'days' : 'day');
+			if(months) txt += ', ' + months + ' ' + ((months > 1) ? 'months' : 'month');
+			if(days) txt += ', ' + days + ' ' + ((days > 1) ? 'days' : 'day');
+			if(hours) txt += ', ' + hours + ' ' + ((hours > 1) ? 'hours' : 'hour');
+			if(minutes) txt += ', ' + minutes + ' ' + ((minutes > 1) ? 'minutes' : 'minute');
+			if(seconds) txt += ', ' + seconds + ' ' + ((seconds > 1) ? 'seconds' : 'second');
+			if(txt.test(', ')) {
+				var spl = txt.split(', ');
+				var save = spl[spl.length - 1].toString();
+				spl = spl.slice(0, spl.length - 1);
+				txt = spl.join(', ');
+				txt += ' and ' + save;
+				if(txt.indexOf(',') == 0) txt = txt.substr(2, txt.length);
+			}
 			var class = 'safe';
 			if(!txt.test('month') && !txt.test('year')) {
 				if(txt.split(' ')[0].toInt() < 4) class = 'urgent';
+				if(!txt.test('day')) class = 'urgent';
 			}
 		}
 		return {txt: txt, cl: class};
