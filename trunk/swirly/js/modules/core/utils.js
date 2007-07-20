@@ -43,12 +43,12 @@ var dateFuncs = {
 		var d = string.split(' ');
 		if(!d[1]) d[1] = '0:0:0';
 		var t = d[1].split(':');
-		var d = d[0].split('-');
+		var nd = d[0].split('-');
 		var tmp = new Date();
 		tmp.setTime(0);
-		var m = d[1].toInt() - 1;
-		tmp.setFullYear(d[0].toInt(), m, d[2].toInt());
-		tmp.setHours(t[0]); tmp.setMinutes(t[1]); tmp.setSeconds(t[2]);
+		var m = nd[1].toInt() - 1;
+		tmp.setFullYear(nd[0].toInt(), m, nd[2].toInt());
+		tmp.setHours(t[0], t[1], t[2]);
 		return tmp;
 	}
 };
@@ -71,10 +71,12 @@ var fFunc = {
 		else due = '';
 		var time = new Array();
 		for(var i = 4; i <= 6; i++) {
-			time.push(f.elements[i].value + 1 - 1);
+			if(f.elements[i].value == '') var k = 0;
+			else var k = f.elements[i].value.toInt();
+			time.push(k);
 		}
 		if(due != '') {
-			due.setHours(time[0]); due.setMinutes(time[1]); due.setSeconds(time[2]);
+			due.setHours(time[0], time[1], time[2]);
 		}
 		var today = new Date();
 		if(due != '' && due < today && f.noteId.value == '') due = '';

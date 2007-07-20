@@ -68,6 +68,7 @@ Evt.Archive = Evt.Base.extend({
 		if(this.data[0].p.scrollLeft - (32 * this.data[6].pr('move')) < 0) var mv = 0;
 		else var mv = this.data[0].p.scrollLeft - (32 * this.data[6].pr('move'));
 		this.effects.scroll.left(mv);
+		this.loadOpts(1);
 	},
 	
 	next: function() {
@@ -75,16 +76,19 @@ Evt.Archive = Evt.Base.extend({
 		if((32 * this.data[6].pr('move')) + this.data[0].p.scrollLeft > this.calcLimit()) var mv = this.calcLimit();
 		else var mv = (this.data[6].pr('move') * 32) + this.data[0].p.scrollLeft;
 		this.effects.scroll.right(mv);
+		this.loadOpts(1);
 	},
 	
 	first: function() {
 		if(this.effects.scroll.timer) this.effects.scroll.clearTimer();
 		this.effects.scroll.left(0);
+		this.loadOpts(1);
 	},
 	
 	last: function() {
 		if(this.effects.scroll.timer) this.effects.scroll.clearTimer();
 		this.effects.scroll.right(this.calcLimit());
+		this.loadOpts(1);
 	},
 	
 	populate: function() {
@@ -127,10 +131,11 @@ Evt.Archive = Evt.Base.extend({
 			if(this.controls.n.getNote(el.id.split('_')[1]).sec != 'archive') return;
 			this.hideTools();
 			var c = el.getCoordinates();
+			var scrl = this.data[0].p.scrollLeft;
 			if(this.data[7].pr('visibility') == 'hidden') {
 				this.data[7].p.setStyles({
 					top: c.top + c.height - this.data[6].pr('yOffset') + 'px',
-					left: c.left - this.data[6].pr('xOffset') + 'px'
+					left: c.left - this.data[6].pr('xOffset') - scrl + 'px'
 				});
 				if(this.effects.fade.timer) this.effects.fade.clearTimer();
 				this.effects.fade(this.data[7].p).start(1);
@@ -138,7 +143,7 @@ Evt.Archive = Evt.Base.extend({
 				this.effects.slide.clearTimer();
 				this.effects.slide.start({
 					top: c.top + c.height - this.data[6].pr('yOffset'),
-					left: c.left - this.data[6].pr('xOffset')
+					left: c.left - this.data[6].pr('xOffset') - scrl
 				});
 			}
 			this.data[8].p.removeEvents('click');

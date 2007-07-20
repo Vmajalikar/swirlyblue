@@ -177,7 +177,6 @@
 ?>
 								</p>
 								<div class="subOpts" <?=((string)$opts['MU']['supported'] == 'yes') ? '' : 'style="display: none;"' ?>>
-									<div class="scrollup"></div>
 									<div>
 <?php
 	if(!$users -> user && (string) $opts['MU']['supported'] == 'yes') {
@@ -196,7 +195,7 @@
 						<tr id="user_' . $user['id'] . '">
 							<td>' . $user -> name . '</td>
 							<td><img src="images/' . $user -> img . '.png" alt="user image" /></td>
-							<td><img src="images/pencil.png" class="editUser" alt="edit user" /> <img src="images/delete.png" class="delUser" alt="delete user" /></td>
+							<td><img src="images/pencil.png" class="editUser" alt="' . (($_SESSION['uid'] == 0 || $_SESSION['uid'] == $user['id']) ? 'editing allowed' : 'edit user') . '" /> <img src="images/delete.png" class="delUser" alt="delete user" /></td>
 						</tr>
 			';
 		}
@@ -207,7 +206,6 @@
 ?>
 									</div>
 									<img src="images/user_add.png" class="addUser" alt="add user" />
-									<div class="scrolldown"></div>
 								</div>
 							</form>
 						</div>
