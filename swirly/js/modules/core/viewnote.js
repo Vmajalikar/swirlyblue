@@ -5,13 +5,16 @@ Evt.ViewNote = Evt.Base.extend({
 			new Data($('viewnote')),
 			new Data($('viewnote').getFirst().getFirst()),
 			new Data($('closeViewNote')),
-			new Data($E('#viewnote .lightbox .box #duedate')),
+			new Data($('countdown')),
 			new Data($E('#viewnote .lightbox .box h2')),
 			new Data($E('#viewnote .lightbox .box p')),
-			new Data($E('#viewnote .lightbox .box .noteactions a'))
+			new Data($('editThisNote'))
 		]);
+		this.optionbar = $E('#viewnote div.optionbar');
+		this.cont = $E('#viewnote div.container');
 		this.effects = {
-			fade: new Fx.Style(this.data[1].p, 'opacity', {duration: 400})
+			fade: new Fx.Style(this.data[1].p, 'opacity', {duration: 400}),
+			sideScroll: new Fx.Scroll(this.cont, {duration: 400})
 		};
 		this.controls = {
 			add: eStack.get('AddNote'),
@@ -27,8 +30,8 @@ Evt.ViewNote = Evt.Base.extend({
 		var n = this.controls.n.getNote(el.getProperty('id').split('_')[1]);
 		var due = this.getDueDate(n.due);
 		this.data[3].p.setHTML(due.txt);
-		this.data[3].p.className = '';
-		this.data[3].p.addClass(due.cl);
+		this.optionbar.className = 'optionbar';
+		this.optionbar.addClass(due.cl);
 		this.data[4].p.setHTML(n.title.replace(/!\[\[AMP\]\]/g, '&amp;'));
 		this.data[5].p.setHTML(n.txt.replace(/!\[\[AMP\]\]/g, '&amp;'));
 		this.effects.fade.start(0, 1);

@@ -37,8 +37,6 @@ Evt.AddNote = Evt.Base.extend({
 		};
 		this.data[0].p.addEvent('click', this.loadClearBox.bind(this));
 		this.data[2].p.addEvent('click', this.closeBox.bind(this));
-		this.data[6].p.addEvent('click', this.closeBox.bind(this));
-		this.data[6].p.addHoverImg(this.data[7].pr('cHover'));
 		this.data[10].p.addEvent('click', this.saveNote.bind(this));
 		this.data[8].p.addEvent('keydown', this.autoFill.bindWithEvent(this));
 		this.data[11].p.each(function(e) {
@@ -49,6 +47,7 @@ Evt.AddNote = Evt.Base.extend({
 		this.data[14].p.each(function(e) {
 			e.addEvent('click', this.changePic.pass(e, this));
 		}.bind(this));
+		this.data[10].p.addClass('secondary');
 	},
 	
 	loadClearBox: function() {
@@ -80,8 +79,7 @@ Evt.AddNote = Evt.Base.extend({
 		this.data[3].p['Category'].value = n.cat.replace(/!\[\[AMP\]\]/g, '&');
 		this.data[4].set('images/_' + n.img + '.png', 'src');
 		this.data[3].p['contents'].value = n.txt.replace(/<br[^>]+>/g, "\n").replace(/!\[\[AMP\]\]/g, '&');
-		this.data[10].set(this.data[7].pr('saveBut'), 'src');
-		this.data[10].p.addHoverImg(this.data[7].pr('sHover'));
+		this.data[10].p.removeClass('secondary');
 		this.effects.fade.start(0, 1);
 		this.resize();
 	},
@@ -95,7 +93,7 @@ Evt.AddNote = Evt.Base.extend({
 	},
 	
 	saveNote: function() {
-		if(this.data[10].pr('src') != this.data[7].pr('sHover')) return;
+		if(this.data[10].p.hasClass('secondary')) return;
 		var dat = this.formToNote(this.data[3].p);
 		if(this.data[3].p.noteId.value != '') {
 			var el = this.controls.n.getEl(dat.id);
@@ -151,13 +149,8 @@ Evt.AddNote = Evt.Base.extend({
 		this.data[11].p.each(function(e) {
 			if(e.value == '') valid = false;
 		});
-		if(valid && this.data[10].pr('src') != this.data[7].pr('saveBut')) {
-			this.data[10].set(this.data[7].pr('saveBut'), 'src');
-			this.data[10].p.addHoverImg(this.data[7].pr('sHover'));
-		} else if(!valid && this.data[10].pr('src') != this.data[7].pr('sButDis')) {
-			this.data[10].p.removeHoverImg();
-			this.data[10].set(this.data[7].pr('sButDis'), 'src');
-		}
+		if(valid) this.data[10].p.removeClass('secondary');
+		else this.data[10].p.addClass('secondary');
 	},
 	
 	loadImgBox: function() {
