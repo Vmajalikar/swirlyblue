@@ -7,10 +7,17 @@ Evt.Notes = Evt.Base.extend({
 		this.controls = {
 			ajax: eStack.get('Jax')
 		}
+		this.cleanOldNotes();
 		this.all = this.data[0].p;
 		this.archive = this.load('archive');
 		this.screen = this.load('screen');
 		this.els = this.createNotes();
+	},
+	
+	cleanOldNotes: function() {
+		for(var i = 0; i < this.data[0].p.length; i++) {
+			if(this.data[0].p[i].due.indexOf(' ') < 0 && this.data[0].p[i].due.length > 0) this.data[0].p[i].due += ' 0:0:0';
+		}
 	},
 	
 	load: function(what) {

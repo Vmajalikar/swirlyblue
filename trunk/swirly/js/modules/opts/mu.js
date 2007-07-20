@@ -6,8 +6,8 @@ Opt.MU = Opt.Base.extend({
 		this.popup = this.master.main.getElement('div div.moreOpts');
 		this.tMasterUser = $('tMasterUser');
 		this.ext = $('extrasBox');
-		this.consts = { left: 15, top: 10, mxH: 4, tr: 21 };
-		this.scroll = new Scroller(this.insub, {area: 5});
+		this.consts = { left: 0, top: 24, mxH: 4, tr: 21 };
+		this.scroll = new Scroller(this.insub, {area: 15});
 		this.scrollers = {top: this.sub.getElement('div.scrollup'), bottom: this.sub.getElement('div.scrolldown')};
 		
 		this.effects = {
@@ -201,7 +201,7 @@ Opt.MU = Opt.Base.extend({
 		var f = el.getElement('form');
 		el.getElement('img.userImg').setProperty('id', 'userImg');
 		$('userImg').addEvent('click', this.chooseUserImg.bind(this));
-		f.saveUser.addEvent('click', this.addUser.pass([f, false], this));
+		$E('a.saveUser').addEvent('click', this.addUser.pass([f, false], this));
 	},
 	
 	loadEditUserBox: function(rows) {
@@ -211,7 +211,7 @@ Opt.MU = Opt.Base.extend({
 		el.getElement('img.userImg').setProperty('id', 'userImg');
 		var f = el.getElement('form');
 		f.userId.value = rows[0].getParent().id.split('_')[1];
-		if(!f.saveUser.events) f.saveUser.addEvent('click', this.editUser.pass(f, this));
+		$E('a.editUser').addEvent('click', this.editUser.pass(f, this));
 		f.user.value = rows[0].innerHTML;
 		f.oldPass.value = '';
 		f.newPass.value = '';

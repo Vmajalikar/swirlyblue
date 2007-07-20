@@ -12,7 +12,10 @@
 	Author URL:		http://www.soul-scape.com/
 
 	Version:		2.0
-	Date:			16th January, 2006
+	Date:			1st June, 2007
+
+memo to self:
+http://dsingleton.co.uk/code/icon-selector/
 
 	-------------------------------------------------------------	*/
 
@@ -36,7 +39,7 @@
 	}
 	
 	div.template { display: none; }
-	
+				
 	div#debug {
 		background:#111;
 		color:#888;
@@ -275,10 +278,6 @@
 			display:block;
 			padding:10px 10px 0px 10px;
 			margin:1px; }
-		
-		.urgent { color: #f11; }
-		.inactive { color: #CDCDCD; }
-		#duedate.safe { color: #08A70B; }
 
 		.box h2 {
 			display:block;
@@ -348,16 +347,6 @@
 			border:1px solid #eee;
 			color:#444;
 			overflow:auto; }
-
-		.box .noteactions {
-			clear:both;
-			display:block;
-			text-align:left;
-			margin:24px 10px 10px 10px; }
-
-		.box .noteactions a {
-			padding-left:2px;
-			padding-right:2px; }
 			
 		div.slider {
 			width: 20000px;
@@ -395,63 +384,54 @@
 			padding-right: 20px; }
 
 			div#menuitems a {
-				color: #fff;
-				font-size: 10px;
-				text-shadow: 2px 2px 1px #222;
-				text-decoration: none;
 				display: block;
 				float: right;
-				margin: -5px 5px 10px;	
-				height: 20px;
-				width: 134px;
+				margin: -7px 5px 10px;
 				cursor: pointer; }
 			
-			div#menuitems a#logout {
+			.xx div#menuitems a#logout {
 				background: url('../img/logout.png') no-repeat 50%;
 				height: 20px;
 				width: 18px;
 			}
 			
-			div#menuitems a#logout:hover {
+			.xx div#menuitems a#logout:hover {
 				background-image: url('../img/logout-highlighted.png');
 			}
 			
-			div#menuitems a.silkico {
+			.xx div#menuitems a.silkico {
 				height: 20px;
 				width: 16px;
 				display: none;
 			}
 			
-			div#menuitems a#moveAll { background: url('../img/arrow_in.png') no-repeat 50%; }
-			div#menuitems a#moveAll:hover { background-image: url('../img/arrow_in_highlighted.png'); }
-			
-			div#menuitems a#alignToGrid { background: url('../img/align.png') no-repeat 50% }
-			div#menuitems a#alignToGrid:hover { background-image: url('../img/align_highlight.png'); }
+			.xx div#menuitems a#moveAll { background: url('../img/arrow_in.png') no-repeat 50%; }
+			.xx div#menuitems a#moveAll:hover { background-image: url('../img/arrow_in_highlighted.png'); }
+			.xx div#menuitems a#alignToGrid { background: url('../img/align.png') no-repeat 50% }
+			.xx div#menuitems a#alignToGrid:hover { background-image: url('../img/align_highlight.png'); }
 
-a#add {
-	background: url('../img/adnote_blue.png') center no-repeat;
-}
-a#add:hover {
-	background-image: url('../img/adnote_lightblue.png')
-}
+			.xx a#add {
+				background: url('../img/adnote_blue.png') center no-repeat;}
+			.xx a#add:hover {
+				background-image: url('../img/adnote_lightblue.png')}
 
-a#save {
-	background-image: url('../img/savechanges_blue.png');
-	background-repeat: no-repeat;
-	background-position: center;
-}
-a#save:hover {
-	background-image: url('../img/savechanges_lightblue.png');
-}
-a#save.alert {
-	background-image: url('../img/savechanges_orange.png');
-}
-a#save.alert:hover { background-image: url('../img/savechanges_orange_highlight.png'); }
+			.xx a#save {
+				background-image: url('../img/savechanges_blue.png');
+				background-repeat: no-repeat;
+				background-position: center;}
+			.xx a#save:hover {
+				background-image: url('../img/savechanges_lightblue.png');}
+			.xx a#save.alert {
+				background-image: url('../img/savechanges_orange.png');}
+			.xx a#save.alert:hover { background-image: url('../img/savechanges_orange_highlight.png'); }
 
-#menuitems span.warn {
-	height: 20px;
-	width: 91px;
-	display: block; }
+			.xx #menuitems span.warn {
+				height: 20px;
+				width: 91px;
+				display: block; }
+
+
+
 
 	div#cornerfolder {
 		position:fixed;
@@ -626,21 +606,6 @@ a#save.alert:hover { background-image: url('../img/savechanges_orange_highlight.
 		width: 75%;
 	}
 
-	.box a:link {
-		color: #0063DC;
-		text-decoration: underline; }
-	.box a:visited {
-		color: #2E67C7;
-		text-decoration: underline; }
-	.box a:hover {
-		color: #FFFFFF;
-		text-decoration: none;
-		background: #0063DC; }
-	.box a:active {
-		color: #FFFFFF;
-		text-decoration: none;
-		background: #0259C4; }
-
 	a img {
 		border:none; }
 
@@ -669,6 +634,21 @@ div.note {
 	cursor: pointer;
 }
 
+	.box p a:link {
+		color: #0063DC;
+		text-decoration: underline; }
+	.box p a:visited {
+		color: #2E67C7;
+		text-decoration: underline; }
+	.box p a:hover {
+		color: #FFFFFF;
+		text-decoration: none;
+		background: #0063DC; }
+	.box p a:active {
+		color: #FFFFFF;
+		text-decoration: none;
+		background: #0259C4; }
+
 ul#orderArchive {
 	margin: 0;
 	padding: 0;
@@ -688,3 +668,117 @@ ul#orderArchive {
 }
 
 .tool-text { background: url('../img/tooltip-bottom.png') repeat-x bottom left; }
+
+.clear { /* generic container (i.e. div) for floating buttons */
+    overflow: hidden;
+    width: 100%;
+}
+
+a.button {
+    background: transparent url('../img/buttonbga.png') no-repeat scroll top right;
+    color: #444;
+    display: block;
+    float: left;
+    font: normal 12px "Trebuchet MS", sans-serif;
+    height: 24px;
+    margin-right: 6px;
+    padding-right: 18px; /* sliding doors padding */
+    text-decoration: none;
+    outline: none; /* hide dotted outline in Firefox */}
+
+a.button span {
+    background: transparent url('../img/buttonbgspan.png') no-repeat;
+    display: block;
+    line-height: 18px;
+    padding: 3px 0 3px 0px;}
+
+a.button span strong {
+    display: block;
+    padding: 0px 0px 0px 30px;}
+
+a.button:active {
+    background-position: bottom right;
+    color: #000;}
+
+a.button:active span {
+    background-position: bottom left;
+    padding: 4px 0 2px 0px; /* push text down 1px */}
+
+a.button:active span strong {
+    padding-left:30px;}
+
+a.button.alert span {background-image:url('../img/buttonbgspan_orange.png');}
+a.button.alert {background-image:url('../img/buttonbga_orange.png');}
+a.button.alert:active span {background-image:url('../img/buttonbgspan_orange.png');}
+a.button.alert:active {background-image:url('../img/buttonbga_orange.png');}
+
+a.button.secondary {
+    background: transparent url('../img/buttonbga.png') no-repeat scroll top right;
+    color: #aaa;}
+
+a.button.secondary span {
+    background: transparent url('../img/buttonbgspan.png') no-repeat;}
+
+a.button.secondary:active {
+    background-position: bottom right;
+    color: #888;}
+
+a.button.secondary:active span {
+    background-position: bottom left;}
+
+a.login.button {
+	margin: 10px 0px 10px 0px;}
+
+a.login.button strong {background:url('../icons/key.png') 8px 50% no-repeat;}
+
+a#add.button strong {background:url('../icons/add.png') 8px 50% no-repeat;}
+a#save.button strong, a#saveNote.button strong {background:url('../icons/disk.png') 11px 50% no-repeat;padding-left:34px;}
+a#moveAll.button strong {background:url('../icons/arrow_in.png') 11px 50% no-repeat;padding-left:34px;}
+a#alignToGrid.button strong {background:url('../icons/application_view_tile.png') 10px 50% no-repeat;padding-left:32px;}
+a#logout.button strong {background:url('../icons/door_in.png') 8px 50% no-repeat;}
+a#closeViewNote.button strong, a#closeEditNote.button strong {background:url('../icons/cross.png') 10px 50% no-repeat;padding-left:33px;}
+a#editViewNote.button strong, a#closeEditNote.button strong {background:url('../icons/cross.png') 8px 50% no-repeat;}
+
+
+
+
+x#menuitems a.button span strong {background:url('../icons/add.png') 5px 50% no-repeat;}
+
+	.optionbar {
+		background:#000;
+		clear:both;
+		display:block;
+		text-align:right;
+		height:34px; }
+
+	.optionbar a.button {
+		float:right;
+		margin-top:5px;}
+
+	.box {
+		border:6px solid #0A2043;}
+
+#countdown {
+	font-size: 24px;
+	font-weight: bold;
+	text-align: left;
+	height: 34px;
+	line-height: 34px;
+	padding-left: 10px;
+}
+
+#viewnote div.container {
+	float: left;
+	text-align: left;
+	width: 65%;
+	overflow: hidden;
+	height: 34px;
+}
+
+.urgent { color: #F11; }
+.optionbar.urgent { background-color: #f11; color: #111 }
+.optionbar.inactive { background-color: #CDCDCD; }
+.optionbar.safe { background-color: #08A70B; }
+
+span strong {font-weight:normal;}
+

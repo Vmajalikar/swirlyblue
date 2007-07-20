@@ -14,7 +14,9 @@ Evt.ImgLoader = Evt.Base.extend({
 			'img/savenote_green_highlight.png',
 			'img/logout-highlighted.png',
 			'img/arrow_in_highlighted.png',
-			'img/align_highlight.png'
+			'img/align_highlight.png',
+			'img/buttonbga_orange.png',
+			'img/buttonbgspan_orange.png'
 		);
 		this.imgs.extend(phpDumpHoverImgs);
 		this.ar = new Array();

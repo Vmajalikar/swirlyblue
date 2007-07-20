@@ -67,10 +67,16 @@
 				what.setStyle('top', Math.floor((h/2)-(b.height/2)) + 'px');
 				what.setStyle('left', Math.floor((w/2)-(b.width/2)) + 'px');
 			}
+			
+			function fSubmit(e) {
+				if(e.key != 'enter') return;
+				$('fLogin').submit();
+			}
 		
 			Window.addEvent('domready', function() {
 				$('loadbox').hide();
 				resize($('loginBox').getFirst().getFirst());
+				$('fLogin').pass.addEvent('keyup', fSubmit.bindWithEvent(this));
 			});
 			
 			Window.addEvent('resize', function() {
@@ -117,11 +123,12 @@
 			<h1 id='logo'></h1>
 
 			<div id="menuitems">
-				<a id="logout" href="javascript: void(0);" style="display: <?=((string) $opts['MU'] -> value == 'on') ? 'block' : 'none' ?>" title="Logout"></a>
-				<a id="alignToGrid" class="silkico" href="javascript: void(0);" style="display: <?=((string) $opts['Snap'] -> value == 'on') ? 'block' : 'none' ?>" title="Align to grid"></a>
-				<a id="moveAll" class="silkico" href="javascript: void(0);" title="Fit all notes onto screen"></a>
-				<a id="save" href="javascript: void(0);"><span class="warn"></span></a>
-				<a id="add" href="javascript: void(0);"></a>			
+				<a id="logout" class="button secondary" href="javascript: void(0);" style="display: <?=((string) $opts['MU'] -> value == 'on') ? 'block' : 'none' ?>" title="Logout"><span><strong>logout</strong></span></a>
+				<a id="alignToGrid" class="button secondary" href="javascript: void(0);" style="display: <?=((string) $opts['Snap'] -> value == 'on') ? 'block' : 'none' ?>" title="Align to grid"><span><strong>align</strong></span></a>
+				<a id="moveAll" class="button secondary" href="javascript: void(0);" title="Fit all notes onto screen"><span><strong>fit to screen</strong></span></a>
+				<a id="save" class="button" href="javascript: void(0);"><span class="warn"><strong>save changes</strong></span></a>
+				<a id="add" class="button" href="javascript: void(0);"><span><strong>add note</strong></span></a>
+							
 			</div>
 		</div>
 		
@@ -152,14 +159,13 @@
 		<div id="Options">
 			<div class="lightbox">
 				<div class="box">
-
-				<img src="images/cross.png" id="closeOptions" class="closeBox" alt="close box" />
-				<div class="slider">
-				<div class="slideme">
-				<h2>Noticeboard Settings</h2>
-				<p>Use the settings below to configure your own Swirlyblue Noticeboard.</p>
-				<form id="fOptions" action="index.php">
-				<p>
+					<img src="images/cross.png" id="closeOptions" class="closeBox" alt="close box" />
+					<div class="slider">
+						<div class="slideme">
+							<h2>Noticeboard Settings</h2>
+							<p>Use the settings below to configure your own Swirlyblue Noticeboard.</p>
+							<form id="fOptions" action="index.php">
+								<p>
 <?php
 	foreach($opts as $key => $option) {
 		if((string) $option['supported'] == 'no') continue;
@@ -169,17 +175,17 @@
 		';
 	}
 ?>
-				</p>
-					<div class="subOpts" <?=((string)$opts['MU']['supported'] == 'yes') ? '' : 'style="display: none;"' ?>>
-					<div class="scrollup"></div>
-					<div>
+								</p>
+								<div class="subOpts" <?=((string)$opts['MU']['supported'] == 'yes') ? '' : 'style="display: none;"' ?>>
+									<div class="scrollup"></div>
+									<div>
 <?php
 	if(!$users -> user && (string) $opts['MU']['supported'] == 'yes') {
 ?>
-						<label>Master User</label>
-						<input type="text" name="masterUser" value="Username" class="temp" />
-						<input type="password" name="masterPass" value="password" class="temp" /> <img src="images/user_gray.png" alt="user image" />
-						<input type="button" name="saveMaster" value="Save" />
+										<label>Master User</label>
+										<input type="text" name="masterUser" value="Username" class="temp" />
+										<input type="password" name="masterPass" value="password" class="temp" /> <img src="images/user_gray.png" alt="user image" />
+										<input type="button" name="saveMaster" value="Save" />
 <?php
 	} else {
 		echo '
@@ -190,7 +196,7 @@
 						<tr id="user_' . $user['id'] . '">
 							<td>' . $user -> name . '</td>
 							<td><img src="images/' . $user -> img . '.png" alt="user image" /></td>
-							<td><img src="images/pencil.png" class="editUser" ' . (((int)$user['id'] == $_SESSION['uid']) ? 'alt="editing allowed"' : 'alt="edit user"') . ' /> <img src="images/delete.png" class="delUser" alt="delete user" /></td>
+							<td><img src="images/pencil.png" class="editUser" alt="edit user" /> <img src="images/delete.png" class="delUser" alt="delete user" /></td>
 						</tr>
 			';
 		}
@@ -199,17 +205,17 @@
 		';
 	}
 ?>
+									</div>
+									<img src="images/user_add.png" class="addUser" alt="add user" />
+									<div class="scrolldown"></div>
+								</div>
+							</form>
+						</div>
+						<div class="slideme">
+							<div class="slideBack">&nbsp;</div>
+							<div id="extrasBox"></div>
+						</div>
 					</div>
-					<img src="images/user_add.png" class="addUser" alt="add user" />
-					<div class="scrolldown"></div>
-					</div>
-				</form>
-				</div>
-				<div class="slideme">
-				<div class="slideBack">&nbsp;</div>
-				<div id="extrasBox"></div>
-				</div>
-				</div>
 				</div>
 				
 				<div class="moreOpts"><div><img src="images/user.png" alt="blue user" /><img src="images/user_female.png" alt="female user" /><img src="images/user_green.png" alt="green user" /><img src="images/user_orange.png" alt="orange user" /><img src="images/user_red.png" alt="red user" /><img src="images/group.png" alt="group user" /></div></div>
@@ -230,8 +236,7 @@
 					
 					<label>Password</label>
 					<input type="password" name="pass" class="bigtext" />
-					
-					<input type="submit" name="login" value="Login" />
+					<a href="javascript: $('fLogin').submit();" class="login button"><span><strong>Login</strong></span></a>
 				</h2>
 				</form>
 				</div>
@@ -268,7 +273,7 @@
 				</h2>
 				
 				<h2 class="moveup" style="clear: both;">
-				<input type="button" name="saveUser" value="Edit" />
+				<a href="javascript: void(0);" class="button editUser"><span><strong>Edit</strong></span></a>
 				</h2>
 			</form>
 		</div>
@@ -286,7 +291,8 @@
 				<input type="password" name="pass" />
 				
 				<img src="images/user.png" class="userImg" alt="user image" />
-				<input type="button" name="saveUser" value="Add" />
+				<h2 style="clear: both; margin-top: 0px;">
+				<a href="javascript: void(0);" class="button saveUser"><span><strong>Add</strong></span></a>
 				</h2>
 			</form>
 		</div>
@@ -295,32 +301,33 @@
 		<div id="viewnote">
 			<div class="lightbox">
 				<div class="box">
+					<div class="optionbar">
+						<div class="container"><span id="countdown">3 days</strong></span></div>
+						<a class="button" id="closeViewNote" href="javascript: void(0);"><span><strong>close</strong></span></a>
+						<a class="button" id="editThisNote" href="javascript: void(0);"><span><strong>edit</strong></span></a>
+					</div>
 
-				<img src="images/cross.png" id="closeViewNote" class="closeBox" alt="close box" />
-
-				<div id="duedate" class="urgent">3 days</div>
-
-				<h2>Note Title</h2>
-
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-
-				<div class="noteactions">
-					<a href="javascript: void(0);">Edit this note</a>
+					<h2>Note Title</h2>
+				
+					<div id="text">
+						<p>Text here, don't just put it inside the p tags, create a set of p tags for each paragraph.</p>
+					</div>
 				</div>
-
-				</div>
-
 			</div>
 		</div>
 
 		<div id="editnote">
 			<div class="lightbox">
 				<div class="box">
-				<img src="images/cross.png" id="closeEditNote" class="closeBox" alt="close box" />
+					<div class="optionbar">
+						<a class="button" id="closeEditNote" href="javascript: void(0);" alt="Cancel and Close"><span><strong>cancel</strong></span></a>
+						<a class="button" id="saveNote" href="javascript: void(0);" alt="Save Changes"><span><strong>save</strong></span></a>
+					</div>
+
 				<form id="fEditNote" action="index.php">
 					<div class="urgent duedate">
 					<input type="hidden" name="noteId" value="" />
-					<input class="date-dd" name="date-dd" maxlength="2" type="text" /> / <input class="date-mm" name="date-mm" maxlength="2" type="text" /> / <input class="date" name="date" maxlength="4" type="text" /> <input type="text" class="date-dd" name="hour" maxlength="2" /> : <input type="text" class="date-dd" name="minute" maxlength="2" /> : <input type="text" class="date-dd" name="second" maxlength="2" /></div>
+					<input class="date-dd" name="day" maxlength="2" type="text" /> / <input class="date-mm" name="month" maxlength="2" type="text" /> / <input class="date" name="date" maxlength="4" type="text" /> <input class="date-dd" name="hour" type="text" maxlength="2" /> : <input class="date-dd" name="minute" type="text" maxlength="2" /> : <input class="date-dd" name="second" type="text" maxlength="2" /></div>
 
 					<h2>
 						<label>Title</label>
@@ -341,9 +348,6 @@
 					<textarea rows="10" cols="70" name="contents" class="required">Note contents</textarea>
 					</h2>
 
-				<div class="noteactions">
-					<img src="img/savenote_disabled.png" id="saveNote" alt="save note" /> <img src="img/cancel_red.png" id="cancelEditNote" alt="cancel editing note" />
-				</div>
 				</form>
 				</div>
 			</div>
