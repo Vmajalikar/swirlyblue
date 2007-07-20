@@ -42,6 +42,8 @@ Evt.ViewNote = Evt.Base.extend({
 		if(!due || due == '') return {txt: 'no deadline', cl: 'inactive'};
 		var d = this.parseDate(due);
 		var today = new Date();
+		console.log(d);
+		console.log(today);
 		if(today >= d) {
 			if(today.getYear() == d.getYear() && today.getMonth() == d.getMonth() && today.getDate() == d.getDate()) var txt = 'today!';
 			else var txt = 'overdue!'
@@ -55,20 +57,12 @@ Evt.ViewNote = Evt.Base.extend({
 			var hours = Math.floor((seconds - (years * 31536000) - (months * 2592000) - (days * 86400)) / 3600);
 			var minutes = Math.floor((seconds - (years * 31536000) - (months * 2592000) - (days * 86400) - (hours * 3600)) / 60);
 			seconds = seconds - (years * 31536000) - (months * 2592000) - (days * 86400) - (hours * 3600) - (minutes * 60);
-			if(years) txt += years + ' ' + ((years > 1) ? 'years' : 'year');
-			if(months) txt += ', ' + months + ' ' + ((months > 1) ? 'months' : 'month');
-			if(days) txt += ', ' + days + ' ' + ((days > 1) ? 'days' : 'day');
-			if(hours) txt += ', ' + hours + ' ' + ((hours > 1) ? 'hours' : 'hour');
-			if(minutes) txt += ', ' + minutes + ' ' + ((minutes > 1) ? 'minutes' : 'minute');
-			if(seconds) txt += ', ' + seconds + ' ' + ((seconds > 1) ? 'seconds' : 'second');
-			if(txt.test(', ')) {
-				var spl = txt.split(', ');
-				var save = spl[spl.length - 1].toString();
-				spl = spl.slice(0, spl.length - 1);
-				txt = spl.join(', ');
-				txt += ' and ' + save;
-				if(txt.indexOf(',') == 0) txt = txt.substr(2, txt.length);
-			}
+			if(years) txt = years + ' ' + ((years > 1) ? 'years' : 'year');
+			if(months && txt == '') txt = months + ' ' + ((months > 1) ? 'months' : 'month');
+			if(days && txt == '') txt = days + ' ' + ((days > 1) ? 'days' : 'day');
+			if(hours && txt == '') txt = hours + ' ' + ((hours > 1) ? 'hours' : 'hour');
+			if(minutes && txt == '') txt = minutes + ' ' + ((minutes > 1) ? 'minutes' : 'minute');
+			if(seconds && txt == '') txt = seconds + ' ' + ((seconds > 1) ? 'seconds' : 'second');
 			var class = 'safe';
 			if(!txt.test('month') && !txt.test('year')) {
 				if(txt.split(' ')[0].toInt() < 4) class = 'urgent';

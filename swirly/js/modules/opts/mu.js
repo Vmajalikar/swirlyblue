@@ -2,13 +2,11 @@ Opt.MU = Opt.Base.extend({
 	initialize: function() {
 		this.parent(this, 'MU');
 		this.sub = $E('div.subOpts');
-		this.insub = this.sub.getElements('div')[1];
+		this.insub = this.sub.getElement('div');
 		this.popup = this.master.main.getElement('div div.moreOpts');
 		this.tMasterUser = $('tMasterUser');
 		this.ext = $('extrasBox');
 		this.consts = { left: 0, top: 24, mxH: 4, tr: 21 };
-		this.scroll = new Scroller(this.insub, {area: 15});
-		this.scrollers = {top: this.sub.getElement('div.scrollup'), bottom: this.sub.getElement('div.scrolldown')};
 		
 		this.effects = {
 			height: function(el) { return new Fx.Style(el, 'height'); },
@@ -66,26 +64,11 @@ Opt.MU = Opt.Base.extend({
 		if(!this.opt.checked) this.sub.setStyle('height', '0px');
 		else {
 			if(this.sub.getElements('div table tbody tr').length > this.consts.mxH) {
-				this.insub.setStyle('height', this.consts.mxH * this.consts.tr + 'px');
-				this.loadScroller();
+				this.insub.setStyles({
+					'height': this.consts.mxH * this.consts.tr + 'px',
+					'overflow': 'auto'
+				});
 			}
-			else this.stopScroller();
-		}
-	},
-	
-	loadScroller: function() {
-		this.scroll.start();
-		if(this.scrollers.top.getStyle('visibility') == 'hidden') {
-			for(var scroller in this.scrollers) {
-				this.effects.fade(this.scrollers[scroller]).start(0, 1);
-			}
-		}
-	},
-	
-	stopScroller: function() {
-		this.scroll.stop();
-		if(this.scrollers.top.getStyle('visibility') != 'hidden') {
-			for(var scroller in this.scrollers) this.effects.fade(this.scrollers[scroller]).start(1, 0);
 		}
 	},
 	
@@ -179,11 +162,12 @@ Opt.MU = Opt.Base.extend({
 	
 	checkScroll: function() {
 		if(this.sub.getElements('div table tbody tr').length > this.consts.mxH) {
-			this.insub.setStyle('height', this.consts.mxH * this.consts.tr + 'px');
-			this.loadScroller();
+			this.insub.setStyles({
+				'height': this.consts.mxH * this.consts.tr + 'px',
+				'overflow': 'auto'
+			});
 		} else {
 			this.insub.setStyle('height', 'auto');
-			this.stopScroller();
 		}
 	},
 	

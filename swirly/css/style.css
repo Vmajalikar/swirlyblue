@@ -309,27 +309,6 @@ http://dsingleton.co.uk/code/icon-selector/
 			margin: 10px;
 			overflow: hidden;
 		}
-		
-		div.box div.subOpts div.scrollup, div.scrolldown {
-			background: url('../images/scrollarrow_up.png') no-repeat 50%;
-			height: 16px;
-			position: relative;
-			width: 100%;
-			top: 0px;
-			left: 0px;
-			margin: auto;
-			margin-bottom: -5px;
-			visibility: hidden;
-		}
-		
-		div.box div.subOpts div.scrolldown {
-			background: url('../images/scrollarrow_down.png') no-repeat 50%;
-			top: auto;
-			bottom: 0px;
-			left: 0px;
-			margin: auto;
-			margin-top: -5px;
-		}
 
 		.box blockquote {
 			font-size:12px;
@@ -737,7 +716,9 @@ a#moveAll.button strong {background:url('../icons/arrow_in.png') 11px 50% no-rep
 a#alignToGrid.button strong {background:url('../icons/application_view_tile.png') 10px 50% no-repeat;padding-left:32px;}
 a#logout.button strong {background:url('../icons/door_in.png') 8px 50% no-repeat;}
 a#closeViewNote.button strong, a#closeEditNote.button strong {background:url('../icons/cross.png') 10px 50% no-repeat;padding-left:33px;}
-a#editViewNote.button strong, a#closeEditNote.button strong {background:url('../icons/cross.png') 8px 50% no-repeat;}
+a#editThisNote.button strong {background:url('../icons/pencil_go.png') 8px 50% no-repeat;}
+a.button.saveUser strong {background:url('../icons/add.png') 8px 50% no-repeat;}
+a.button.editUser strong {background:url('../icons/pencil_go.png') 8px 50% no-repeat;}
 
 
 
@@ -770,7 +751,7 @@ x#menuitems a.button span strong {background:url('../icons/add.png') 5px 50% no-
 #viewnote div.container {
 	float: left;
 	text-align: left;
-	width: 65%;
+	width: 55%;
 	overflow: hidden;
 	height: 34px;
 }
